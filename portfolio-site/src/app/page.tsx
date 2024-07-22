@@ -1,3 +1,5 @@
+import Photo from './photo'
+
 const mocks = [
   "/20240615-20240615-DSCF5843-Enhanced-NR.jpg",
   "/20240507-DSCF5302.jpg",
@@ -17,11 +19,11 @@ export default function HomePage() {
   return (
     <main className="">
       <div className="flex flex-wrap gap-4">
-      {[...mockImages, ...mockImages].map((image) => (
-        <div key={image.id} className="w-48">
-          <img src={image.url} />
-        </div>
-      ))}
+      {mockImages.map((image) => (
+          <div key={image.id} className="w-48">
+            <Photo url={image.url} />
+          </div>
+        ))}
       </div>
     </main>
   );
