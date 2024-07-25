@@ -1,23 +1,20 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
     provider = "postgresql"
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
 
 model Post {
     id        Int      @id @default(autoincrement())
-    title     String
-    content   String
-    image_uri String
+    name      String
     createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    createdBy   User   @relation(fields: [createdById], references: [id])
+    createdById String
 
     @@index([name])
 }
@@ -55,8 +52,10 @@ model User {
     name          String?
     email         String?   @unique
     emailVerified DateTime?
+    image         String?
     accounts      Account[]
     sessions      Session[]
+    posts         Post[]
 }
 
 model VerificationToken {

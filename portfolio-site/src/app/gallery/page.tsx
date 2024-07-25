@@ -1,4 +1,4 @@
-import Photo from '../components/photo'
+import Photo from '../../components/photo'
 
 const mocks = [
   "/20240615-20240615-DSCF5843-Enhanced-NR.jpg",
@@ -16,16 +16,16 @@ const mockImages = mocks.map((url, index) => ({
   alt: "something dynamic alt"
 }));
 
-export default function HomePage() {
-  return (
-    <main className="">
-      <div className="flex flex-wrap gap-4">
-      {mockImages.map((image) => (
-          <div key={image.id} className="w-48">
-            <Photo url={image.url} alt={image.alt}/>
-          </div>
-        ))}
-      </div>
-    </main>
-  );
-}
+export default function GalleryPage() {
+    return (
+      <main className="">
+        <div className="flex flex-wrap gap-4">
+        {mockImages.map((image) => (
+            <div key={image.id} className="w-48">
+              <Photo url={image.url} alt={image.alt}/>
+            </div>
+          ))}
+        </div>
+      </main>
+    );
+  }
