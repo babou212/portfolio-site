@@ -1,24 +1,29 @@
-import { getServerSession } from "next-auth/next";
-
-import { authOptions } from "~/server/auth";
-import { redirect } from "next/navigation";
-
+import { cookies } from "next/headers";
 import AdminPanel from "./adminPanel";
 
-async function ReturnUnAuthorizedAccess() {
-    const session = await getServerSession(authOptions);
+import { getSessionTokenBySessionToken } from "../../server/getData";
+import { redirect } from "next/navigation";
 
-  if (!session) {
-    return redirect('/api/auth/signin');
-  }
-};
+const cookieStore = cookies();
+const cookieToken = cookieStore.get("authToken");
 
-export default function AdminPage() {
+console.log("cookie token", cookieToken)
+
+const sessionToken = getSessionTokenBySessionToken(cookieToken?.value);
+
+console.log("session token ", sessionToken);
+
+const isValid = await sessionToken == cookieToken?.value;
+
+console.log(isValid);
+
+// if (isValid == false) { redirect("/api/auth/login"); };
+
+export default async function AdminPage() {
     return (
       <main className="">
         <div>
-            <ReturnUnAuthorizedAccess />
-            <AdminPanel/>
+            {isValid && <AdminPanel/>}
         </div>
       </main>
     );
