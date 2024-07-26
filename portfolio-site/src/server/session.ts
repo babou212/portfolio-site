@@ -53,10 +53,10 @@ export async function verifySession() {
   const session = await decrypt(cookie);
 
   if (!session?.userId) {
-    redirect('/api/auth/login');
+    return false;
   }
 
-  return { isAuth: true, userId: Number(session.userId) };
+  return true;
 }
 
 export async function updateSession() {

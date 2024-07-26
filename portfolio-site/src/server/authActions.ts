@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -6,8 +7,8 @@
 "use server";
 
 import { z } from "zod";
-import { db } from "../server/db"
 import { createSession } from "./session";
+import { getUserByEmail } from "./repo";
 
 const schemaRegister = z.object({
     email: z.string().email({
@@ -26,7 +27,7 @@ export async function loginUserAction(prevState: any, formData: FormData) {
     //     password: 'password',
     //   },
     // })
-  
+
     const validatedFields = schemaRegister.safeParse({
       email: formData.get("email"),  
       password: formData.get("password"),
@@ -39,7 +40,7 @@ export async function loginUserAction(prevState: any, formData: FormData) {
         message: "Missing Fields. Failed to Login.",
       };
     }
-    
+
     await validateUser(validatedFields.data.email, validatedFields.data.password);
 
     return {
@@ -49,41 +50,9 @@ export async function loginUserAction(prevState: any, formData: FormData) {
   };
 
 async function validateUser(email:string, password:string) {
-  const getUser = await db.user.findFirst()
+  const user = await getUserByEmail(email);
 
-  if (getUser?.password == password && getUser?.email == email) {
-    await createSession(getUser.id);
-    // await createSession(crypto.randomUUID(), getUser.id);
+  if (user?.password == password && user?.email == email) {
+    await createSession(user.id);
 } 
 };  
-
-// async function createSession(token: string, userId: string) {
-
-//   const session = await db.session.create({
-//     data: {
-//       sessionToken: token,
-//       expires: new Date(Date.now() + 60 * 60),
-//       userId: userId,
-//     },
-//   })
-
-//   cookies().set({
-//     name: "authToken",
-//     value: token,
-//     httpOnly: true,
-//     secure: true,
-//     path: "/admin-panel",
-//     maxAge: 60,
-//   });
-
-//   // cookies().set({
-//   //   name: "authToken",
-//   //   value: token,
-//   //   httpOnly: true,
-//   //   path: "/",
-//   //   maxAge: 60 * 60,
-//   //   expires: new Date(Date.now() + 60 * 60),
-//   // });
-
-//   redirect("/admin-panel")
-// };

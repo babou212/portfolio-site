@@ -1,8 +1,10 @@
-export default function AdminPanel() {
-    return (
+import CreatePost  from "~/components/createPost";
 
+export default function AdminPanel() {
+
+    return (
         <div>
-            Logged In
+             <CreatePost/>
         </div>
     );
 }

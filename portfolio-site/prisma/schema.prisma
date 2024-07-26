@@ -8,22 +8,16 @@ datasource db {
 }
 
 model Post {
-    id        Int      @id @default(autoincrement())
-    image     String
-    content   String   
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id            Int      @id @default(autoincrement())
+    title         String
+    image         String
+    content       String?   
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String   @id @default(cuid())
     email         String   @unique
     password      String
-}
-
-model Session {
-    id  String @id @default(cuid())
-    sessionToken String   @unique
-    expires      DateTime
-    userId       String   
 }
