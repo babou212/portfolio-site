@@ -5,11 +5,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 "use server";
 
-import { cookies } from "next/headers";
-
 import { z } from "zod";
 import { db } from "../server/db"
-import { redirect } from "next/navigation";
+import { createSession } from "./session";
 
 const schemaRegister = z.object({
     email: z.string().email({
@@ -54,28 +52,38 @@ async function validateUser(email:string, password:string) {
   const getUser = await db.user.findFirst()
 
   if (getUser?.password == password && getUser?.email == email) {
-    await createSession(crypto.randomUUID(), getUser.id);
+    await createSession(getUser.id);
+    // await createSession(crypto.randomUUID(), getUser.id);
 } 
 };  
 
-async function createSession(token: string, userId: string) {
+// async function createSession(token: string, userId: string) {
 
-  const session = await db.session.create({
-    data: {
-      sessionToken: token,
-      expires: new Date(Date.now() + 60 * 60),
-      userId: userId,
-    },
-  })
+//   const session = await db.session.create({
+//     data: {
+//       sessionToken: token,
+//       expires: new Date(Date.now() + 60 * 60),
+//       userId: userId,
+//     },
+//   })
 
-  cookies().set({
-    name: "authToken",
-    value: token,
-    httpOnly: true,
-    path: "/",
-    maxAge: 60 * 60,
-    expires: new Date(Date.now() + 60 * 60),
-  });
+//   cookies().set({
+//     name: "authToken",
+//     value: token,
+//     httpOnly: true,
+//     secure: true,
+//     path: "/admin-panel",
+//     maxAge: 60,
+//   });
 
-  redirect("/admin-panel")
-};
+//   // cookies().set({
+//   //   name: "authToken",
+//   //   value: token,
+//   //   httpOnly: true,
+//   //   path: "/",
+//   //   maxAge: 60 * 60,
+//   //   expires: new Date(Date.now() + 60 * 60),
+//   // });
+
+//   redirect("/admin-panel")
+// };

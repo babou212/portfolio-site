@@ -4,26 +4,20 @@ import AdminPanel from "./adminPanel";
 import { getSessionTokenBySessionToken } from "../../server/getData";
 import { redirect } from "next/navigation";
 
-const cookieStore = cookies();
-const cookieToken = cookieStore.get("authToken");
+// const cookieStore = cookies();
+// const cookieToken = cookieStore.get("authToken");
+// const sessionToken = getSessionTokenBySessionToken(cookieToken?.value);
+// const isValid = await sessionToken == cookieToken?.value;
 
-console.log("cookie token", cookieToken)
-
-const sessionToken = getSessionTokenBySessionToken(cookieToken?.value);
-
-console.log("session token ", sessionToken);
-
-const isValid = await sessionToken == cookieToken?.value;
-
-console.log(isValid);
-
-// if (isValid == false) { redirect("/api/auth/login"); };
+// console.log(cookieToken?.value);
 
 export default async function AdminPage() {
+  // if (isValid == false) { redirect("/api/auth/login"); };
+
     return (
       <main className="">
         <div>
-            {isValid && <AdminPanel/>}
+            {<AdminPanel/>}
         </div>
       </main>
     );
