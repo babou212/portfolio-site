@@ -20,6 +20,7 @@ import {
 import { Label } from "../../../../components/ui/label";
 import { Input } from "../../../../components/ui/input";
 import { ZodErrors } from "../../../../components/zodErrors";
+import { Button } from "~/components/ui/button";
 
 const INITIAL_STATE = {
   data: null,
@@ -64,7 +65,7 @@ export default function LoginForm() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <button className="w-full">Sign In</button>
+            <Button className="w-full">Sign In</Button>
           </CardFooter>
         </Card>
       </form>

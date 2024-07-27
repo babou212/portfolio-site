@@ -22,7 +22,7 @@ const ACCEPTED_IMAGE_TYPES = [
 const uploadLocation = "./imagestore/";
 
 const schemaRegister = z.object({
-    title: z.string().min(6).max(20, {
+    title: z.string().min(5).max(100, {
         message: "Please enter a valid title",
       }),
     content: z.string().min(0).max(100, {
@@ -51,9 +51,8 @@ export async function postUpload(prevState: any, formData: FormData) {
     if (!validatedFields.success) {
       return {
         ...prevState,
-        zodErrors: validatedFields.error.flatten().fieldErrors,
-        message: "Title missing or file too large.",
-      };
+        message: "Missing Fields. Failed to Upload.",
+      }
     }
 
     const file = formData.get("file") as File;
