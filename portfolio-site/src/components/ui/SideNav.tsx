@@ -1,8 +1,5 @@
 import Link from "next/link";
-import { verifySession } from "../../server/session";
 import { ModeToggle } from "../ui/darkModeToggle";
-
-const isValidSession = verifySession();
 
 export default async function SideNav() {
     return (
@@ -11,7 +8,6 @@ export default async function SideNav() {
         <Link href="/about-me" >About</Link>
         <Link href="/gallery" >Gallery</Link>
         <Link href="/contact" >Contact</Link>
-        {await isValidSession && <Link href="/admin-panel" >Admin Panel</Link>}
         <ModeToggle />
         </nav>
     );

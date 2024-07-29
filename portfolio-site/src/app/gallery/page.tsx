@@ -1,18 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import Photo from '../../components/photo'
+import Image from "next/image";
 import { getAllImage } from '~/server/repo';
 
 const imageCall = await getAllImage();
 
 export default function GalleryPage() {
     return (
-        <div className="flex flex-wrap gap-4">
-        {imageCall.map((image: { image: any }) => (
-            <div key={Math.random()} className="w-48">
-              <Photo url={image.image} alt={image.image}/>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 place-items-center">
+        {imageCall.map((image) => (
+            <div key={Math.random()} className="relative h-64 w-64">
+                <Image src={image.image} alt={image.title}
+                  fill
+                  quality={80}
+                  style={{objectFit: "contain"}}
+                  placeholder="empty" />
+              </div>
           ))}
         </div>
     );

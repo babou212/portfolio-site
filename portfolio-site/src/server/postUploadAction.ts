@@ -10,7 +10,7 @@ import fs from "node:fs/promises";
 import { z } from "zod";
 import { createPost } from "./repo";
 
-const MAX_FILE_SIZE = 5000000;
+const MAX_FILE_SIZE = 50000000000;
 
 const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
@@ -26,6 +26,9 @@ const schemaRegister = z.object({
     content: z.string().min(0).max(100, {
         message: "Please enter valid description",
       }),
+      category: z.string().min(1).max(20, {
+        message: "Please enter category description",
+      }),
     image: z.any()
     .refine((file) => {
       if (file.size === 0 || file.name === undefined) return false;
@@ -35,7 +38,7 @@ const schemaRegister = z.object({
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       ".jpg, .jpeg, .png and .webp files are accepted."
     )
-    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`),
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 500MB.`),
 });
 
 export async function postUpload(prevState: any, formData: FormData) {
@@ -43,6 +46,7 @@ export async function postUpload(prevState: any, formData: FormData) {
     const validatedFields = schemaRegister.safeParse({
       title: formData.get("title"),
       content: formData.get("content"),
+      category: formData.get("category"),
       image: formData.get("file"),    
     });
   
@@ -61,10 +65,10 @@ export async function postUpload(prevState: any, formData: FormData) {
     const fileName = validatedFields.data.image?.name;
     const imageFilePath = "/upload/" + fileName;
 
-    const category = formData.get("category");
+    const shouldDisplay = formData.get("isDisplay") === "true";
 
-    await createPost(validatedFields.data.title, validatedFields.data.content, 
-      category, imageFilePath);
+    await createPost(validatedFields.data.title, validatedFields.data.content,
+      validatedFields.data.category, shouldDisplay ,imageFilePath);
 
     return {
       ...prevState,

@@ -9,13 +9,14 @@
 import React, { useRef, useState } from "react";
 import { useFormState } from "react-dom";
 
-import { postUpload } from "../server/postUploadAction";
+import { postUpload } from "../../server/postUploadAction";
 
-import { Button } from "./ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Button } from "../../components/ui/button";
+import { Textarea } from "../../components/ui/textarea";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
+import { Label } from "../../components/ui/label";
+import { Input } from "../../components/ui/input";
 
 const INITIAL_STATE = {
     data: null,
@@ -41,7 +42,7 @@ export default function CreatePost() {
                     <CardHeader className="space-y-1">
                     <CardTitle className="text-3xl font-bold">Upload Post</CardTitle>
                         <CardDescription>
-                            Enter the Required info to create new Post
+                            Enter info below to create new Post
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -51,17 +52,14 @@ export default function CreatePost() {
                             id="title"
                             name="title"
                             type="title"
-                            placeholder="Nice waterfall Picture"
+                            placeholder="Nice meaningful title"
                         />
                         </div>
                         <div className="space-y-2">
                         <Label htmlFor="content">Post Description</Label>
-                        <Input
-                            id="content"
-                            name="content"
-                            type="content"
-                            placeholder="Nice waterfall picture taken on walk with friends"
-                        />
+                        <Textarea id="content"
+                                  name="content" 
+                                  placeholder="Type your message here." />
                      </div>
                      <div className="space-y-2">
                      <Label htmlFor="category">Category</Label>
@@ -74,6 +72,18 @@ export default function CreatePost() {
                             <SelectItem value="Landscape">Landscape</SelectItem>
                             <SelectItem value="Forest">Forest</SelectItem>
                             <SelectItem value="Seascape">Seascape</SelectItem>
+                        </SelectContent>
+                        </Select>
+                     </div>
+                     <div className="space-y-2">
+                     <Label htmlFor="category">Display On Front Page</Label>
+                     <Select name="isDisplay">
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Yes or No" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="false">No</SelectItem>
+                            <SelectItem value="true">Yes</SelectItem>
                         </SelectContent>
                         </Select>
                      </div>

@@ -16,15 +16,17 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="flex flex-col">
+      <body>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-        <SideNav />
-        {children}
+          <div className="grid h-screen grid-rows-[auto,1fr]">
+            <SideNav />
+            <main className="overflow-y-scroll">{children}</main>
+          </div>
         </ThemeProvider>
       </body>
     </html>

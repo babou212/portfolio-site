@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-"use server";
+import 'server-only';
 
 import { db } from "./db";
 
@@ -18,7 +18,7 @@ export async function getUserByEmail(email: string | undefined) {
    return user;
 }
 
-export async function createPost(title: string, content: string, category: string, filePath: string) {
+export async function createPost(title: string, content: string | null, category: string, isDisplay: boolean ,filePath: string) {
   if (title == undefined) { return }
 
   await db.post.create({
@@ -27,6 +27,7 @@ export async function createPost(title: string, content: string, category: strin
       content: content,
       category: category,
       image: filePath,
+      isDisplay: isDisplay,
     },
   })
 }
@@ -35,6 +36,7 @@ export async function getAllImage() {
   const imagePaths =  await db.post.findMany({
     select: {
     image: true,
+    title: true
    },
  });
 

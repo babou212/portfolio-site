@@ -1,31 +1,22 @@
-import Photo from '../components/photo'
+import Image from "next/image";
+import { getPostsThatShouldBeDisplayed } from '~/server/repo';
 
-const mocks = [
-  "/20240615-20240615-DSCF5843-Enhanced-NR.jpg",
-  "/20240507-DSCF5302.jpg",
-  "/20240507-DSCF5293.jpg",
-  "/20240506-DSCF5161-Enhanced-NR.jpg",
-  "/20230910-DSCF3236-Enhanced-NR-Edit.jpg",
-  "/20230910-DSCF3233-Enhanced-NR.jpg",
-  "/20230909-DSCF3137-Enhanced-NR.jpg",
-];
+const imageCall = await getPostsThatShouldBeDisplayed();
 
-const mockImages = mocks.map((url, index) => ({
-  id: index +1,
-  url,
-  alt: "something dynamic alt"
-}));
+console.log(imageCall);
 
 export default function HomePage() {
   return (
-    <main className="">
-      <div className="flex flex-wrap gap-4">
-      {mockImages.map((image) => (
-          <div key={image.id} className="w-48">
-            <Photo url={image.url} alt={image.alt}/>
-          </div>
-        ))}
-      </div>
-    </main>
+    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 place-items-center">
+        {imageCall.map((image) => (
+            <div key={Math.random()} className="relative h-80 w-80">
+                <Image src={image.image} alt={image.title}
+                  fill
+                  quality={80}
+                  style={{objectFit: "contain"}}
+                  placeholder="empty" />
+              </div>
+          ))}
+    </div>
   );
 }
