@@ -1,10 +1,10 @@
-import AdminPanel from "./adminPanel";
+import CreatePost from "~/components/createPost";
 
-export default async function AdminPage() {
+export default function AdminPage() {
     return (
       <main className="flex items-center justify-center">
         <div>
-            {<AdminPanel/>}
+         <CreatePost/>
         </div>
       </main>
     );

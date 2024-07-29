@@ -20,14 +20,6 @@ const schemaRegister = z.object({
   });
 
 export async function loginUserAction(prevState: any, formData: FormData) {
-
-    // const user = await db.user.create({
-    //   data: {
-    //     email: 'admin@admin.com',
-    //     password: 'password',
-    //   },
-    // })
-
     const validatedFields = schemaRegister.safeParse({
       email: formData.get("email"),  
       password: formData.get("password"),
@@ -47,12 +39,12 @@ export async function loginUserAction(prevState: any, formData: FormData) {
       ...prevState,
       data: "ok",
     };
-  };
+};
 
 async function validateUser(email:string, password:string) {
   const user = await getUserByEmail(email);
 
   if (user?.password == password && user?.email == email) {
     await createSession(user.id);
-} 
+ } 
 };  

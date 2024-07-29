@@ -19,8 +19,6 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-const uploadLocation = "./imagestore/";
-
 const schemaRegister = z.object({
     title: z.string().min(5).max(100, {
         message: "Please enter a valid title",
@@ -58,12 +56,15 @@ export async function postUpload(prevState: any, formData: FormData) {
     const file = formData.get("file") as File;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    await fs.writeFile(`./imagestore/${file.name}`, buffer);
+    await fs.writeFile(`./public/upload/${file.name}`, buffer);
 
     const fileName = validatedFields.data.image?.name;
-    const imageFilePath = uploadLocation + fileName;
+    const imageFilePath = "/upload/" + fileName;
 
-    await createPost(validatedFields.data.title, validatedFields.data.content, imageFilePath);
+    const category = formData.get("category");
+
+    await createPost(validatedFields.data.title, validatedFields.data.content, 
+      category, imageFilePath);
 
     return {
       ...prevState,

@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 import SideNav from "../components/ui/SideNav"
+import { ThemeProvider } from "../components/themeProvider"
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
@@ -16,8 +17,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="flex flex-col">
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         <SideNav />
         {children}
+        </ThemeProvider>
       </body>
     </html>
   );

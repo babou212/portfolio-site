@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 const INITIAL_STATE = {
     data: null,
@@ -61,6 +62,20 @@ export default function CreatePost() {
                             type="content"
                             placeholder="Nice waterfall picture taken on walk with friends"
                         />
+                     </div>
+                     <div className="space-y-2">
+                     <Label htmlFor="category">Category</Label>
+                     <Select name="category">
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="Black and white">Black and white</SelectItem>
+                            <SelectItem value="Landscape">Landscape</SelectItem>
+                            <SelectItem value="Forest">Forest</SelectItem>
+                            <SelectItem value="Seascape">Seascape</SelectItem>
+                        </SelectContent>
+                        </Select>
                      </div>
                      <div className="space-y-2">
                         <Label htmlFor="file">Image</Label>
