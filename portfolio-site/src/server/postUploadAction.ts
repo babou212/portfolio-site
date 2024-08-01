@@ -38,7 +38,7 @@ const schemaRegister = z.object({
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
       ".jpg, .jpeg, .png and .webp files are accepted."
     )
-    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 500MB.`),
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 50MB.`),
 });
 
 export async function postUpload(prevState: any, formData: FormData) {
@@ -57,13 +57,15 @@ export async function postUpload(prevState: any, formData: FormData) {
       }
     }
 
+    const uploadDirectoryPath = process.env.UPLOAD_DIRECTORY;
+
+    const fileName = validatedFields.data.image?.name;
+    const imageFilePath = uploadDirectoryPath + fileName;
+  
     const file = formData.get("file") as File;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    await fs.writeFile(`./public/upload/${file.name}`, buffer);
-
-    const fileName = validatedFields.data.image?.name;
-    const imageFilePath = "/upload/" + fileName;
+    await fs.writeFile(imageFilePath, buffer);
 
     const shouldDisplay = formData.get("isDisplay") === "true";
 
