@@ -62,7 +62,7 @@ export async function postUpload(prevState: any, formData: FormData) {
     const fileName = validatedFields.data.image?.name;
     const imageFilePath = uploadDirectoryPath + fileName;
   
-    const file = formData.get("file") as File;
+    const file = validatedFields.data.image?.name as File;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
     await fs.writeFile(imageFilePath, buffer);
