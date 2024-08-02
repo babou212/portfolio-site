@@ -8,8 +8,18 @@ await import("./src/env.js");
 const config = {
   experimental: {
     serverActions: {
-      allowedOrigins: ["localhost:3000", "dylancree.com", "www.dylancree.com"],
-    }
-  }};
+      allowedOrigins: ["localhost:3000", "swagmeister.uk", "www.swagmeister.com"],
+    }},
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: "www.swagmeister.uk",
+          port: '',
+          pathname: '/images/**',
+        },
+      ],
+     },
+  };
 
 export default config;
