@@ -5,6 +5,7 @@
 import 'server-only';
 
 import { db } from "./db";
+import { verifySession } from './session';
 
 export async function getUserByEmail(email: string | undefined) {
   if (email == undefined) { return  }
@@ -19,7 +20,7 @@ export async function getUserByEmail(email: string | undefined) {
 }
 
 export async function createPost(title: string, content: string | null, category: string, isDisplay: boolean ,filePath: string) {
-  if (title == undefined) { return }
+  if (await verifySession() == false) { return } 
 
   await db.post.create({
     data: {
