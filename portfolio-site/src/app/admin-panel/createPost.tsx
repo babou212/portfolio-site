@@ -31,8 +31,6 @@ export default function CreatePost() {
     
     const ref = useRef<HTMLFormElement>(null)
 
-    console.log(formState.message);
-
     if (submitted == true) { ref.current?.reset() };
         
     return(

@@ -38,11 +38,13 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Acme <contact@swagmeister.uk>',
-      to: [validatedFields.data?.email],
+      from: 'Dylan Cree <contact@swagmeister.uk>',
+      to: validatedFields.data?.email,
       subject: "Contact Form",
       react: EmailTemplate({ email: validatedFields.data?.email, content: validatedFields.data?.content  }) as React.ReactElement,
     });
+
+    console.log("inside email block");
 
     if (error) {
       return Response.json({ error }, { status: 500 });
