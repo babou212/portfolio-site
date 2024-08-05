@@ -5,7 +5,7 @@
 
 import { useFormState } from "react-dom";
 
-import { sendEmailAction } from "../../server/emailAction";
+import { POST } from "../api/email/route";
 
 import {
   CardTitle,
@@ -28,7 +28,7 @@ const INITIAL_STATE = {
 export default function LoginForm() {
   const [submitted, setSubmitted] = useState(false);
   const [formState, formAction] = useFormState(
-    sendEmailAction,
+    POST,
     INITIAL_STATE
   );
 
