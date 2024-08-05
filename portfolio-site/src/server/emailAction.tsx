@@ -34,16 +34,13 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
         }
       }
     
-    const emailUserName = process.env.EMAIL_USERNAME;
-    const emailPwd = process.env.EMAIL_PASSWORD;
+    const emailPwd = process.env.MAILGUN_API_KEY;
 
     try {
       const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
+        service: 'mailgun',
         auth: {
-          user: emailUserName,
+          user: 'sandbox7de25ad8adcd4c1aac0cb69503f6443c.mailgun.org',
           pass: emailPwd,
         },
       });
