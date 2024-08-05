@@ -46,7 +46,7 @@ export default function LoginForm() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Your Email</Label>
                 <Input
                   id="email"
                   name="email"
