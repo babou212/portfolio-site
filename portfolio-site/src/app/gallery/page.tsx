@@ -13,7 +13,9 @@ export default async function GalleryPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 place-items-center">
         {imageCall.map((image) => (
             <div key={Math.random()} className="relative h-64 w-64">
-                <Image src={image.image} alt={image.title}
+                <Image 
+                  src={image.image} 
+                  alt={image.title}
                   fill
                   quality={80}
                   style={{objectFit: "contain"}}

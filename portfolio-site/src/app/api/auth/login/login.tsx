@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useFormState } from "react-dom";
@@ -19,7 +16,6 @@ import {
 
 import { Label } from "../../../../components/ui/label";
 import { Input } from "../../../../components/ui/input";
-import { ZodErrors } from "../../../../components/zodErrors";
 import { Button } from "~/components/ui/button";
 
 const INITIAL_STATE = {
@@ -51,7 +47,6 @@ export default function LoginForm() {
                 type="email"
                 placeholder="name@example.com"
               />
-              <ZodErrors error={formState?.zodErrors?.email} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
@@ -61,7 +56,6 @@ export default function LoginForm() {
                 type="password"
                 placeholder="password"
               />
-              <ZodErrors error={formState?.zodErrors?.password} />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">

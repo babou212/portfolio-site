@@ -8,6 +8,7 @@ await import("./src/env.js");
 const config = {
   experimental: {
     serverActions: {
+      bodySizeLimit: '25mb',
       allowedOrigins: ["localhost:3000", "swagmeister.uk", "www.swagmeister.com"],
     }},
     images: {

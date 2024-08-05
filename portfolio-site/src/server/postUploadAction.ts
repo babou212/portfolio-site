@@ -9,6 +9,7 @@ import fs from "node:fs/promises";
 
 import { z } from "zod";
 import { createPost } from "./repo";
+import { verifySession } from "./session";
 
 const MAX_FILE_SIZE = 50000000000;
 
@@ -42,6 +43,13 @@ const schemaRegister = z.object({
 });
 
 export async function postUpload(prevState: any, formData: FormData) {
+
+  if (!verifySession) {
+    return {
+      ...prevState,
+      message: "Not an authorized user.",
+    }
+  }
 
     const validatedFields = schemaRegister.safeParse({
       title: formData.get("title"),
