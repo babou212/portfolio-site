@@ -5,13 +5,9 @@
 "use server";
 
 import { EmailTemplate } from '../components/emailTemplate';
-import { Resend } from 'resend';
 import { z } from "zod";
 
 import type * as React from 'react';
-
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 const schemaRegister = z.object({
     email: z.string().email({
@@ -36,22 +32,22 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
         }
       }
 
-  try {
-    const { data, error } = await resend.emails.send({
-      from: 'Dylan Cree <contact@swagmeister.uk>',
-      to: validatedFields.data?.email,
-      subject: "Contact Form",
-      react: EmailTemplate({ email: validatedFields.data?.email, content: validatedFields.data?.content  }) as React.ReactElement,
-    });
+  // try {
+  //   const { data, error } = await resend.emails.send({
+  //     from: 'Dylan Cree <contact@swagmeister.uk>',
+  //     to: validatedFields.data?.email,
+  //     subject: "Contact Form",
+  //     react: EmailTemplate({ email: validatedFields.data?.email, content: validatedFields.data?.content  }) as React.ReactElement,
+  //   });
 
-    console.log("inside email block");
+  //   console.log("inside email block");
 
-    if (error) {
-      return Response.json({ error }, { status: 500 });
-    }
+  //   if (error) {
+  //     return Response.json({ error }, { status: 500 });
+  //   }
 
-    return Response.json({ data });
-  } catch (error) {
-    return Response.json({ error }, { status: 500 });
-  }
+  //   return Response.json({ data });
+  // } catch (error) {
+  //   return Response.json({ error }, { status: 500 });
+  // }
 }
