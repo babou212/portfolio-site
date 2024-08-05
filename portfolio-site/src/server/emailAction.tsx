@@ -24,16 +24,16 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
 
     const validatedFields = schemaRegister.safeParse({
         email: formData.get("email"),  
-        message: formData.get("message"),
+        message: formData.get("content"),
       });
-  
-      if (!validatedFields.success) {
-        return {
-          ...prevState,
-          message: "Missing Fields. Failed to Upload.",
-        }
-      }
     
+    if (!validatedFields.success) {
+      return {
+        ...prevState,
+        message: "Missing Fields. Failed to Upload.",
+      }
+    } 
+
     const emailPwd = process.env.MAILGUN_PASSWORD;
     const emailUser = process.env.MAILGUN_USERNAME;
 
