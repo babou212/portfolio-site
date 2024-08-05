@@ -37,7 +37,7 @@ export default function LoginForm() {
   if (submitted == true) { ref.current?.reset() };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    // <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-md">
         <form ref={ref} onSubmit={() => setSubmitted(true)} action={formAction}>
           <Card>
@@ -52,14 +52,13 @@ export default function LoginForm() {
                   name="email"
                   type="email"
                   placeholder="name@example.com"
-                  required
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="content">Message</Label>
                 <Textarea 
                     id="content"
-                    name="content" 
+                    name="content"
                     placeholder="Type your message here." />
               </div>
             </CardContent>
@@ -69,6 +68,6 @@ export default function LoginForm() {
           </Card>
         </form>
       </div>
-    </div>
+    // </div>
   );
 }
