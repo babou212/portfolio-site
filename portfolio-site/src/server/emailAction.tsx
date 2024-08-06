@@ -50,7 +50,7 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
       const email = process.env.PERSONAL_EMAIL;
       
       const options = {
-        from: validatedFields.data?.email,
+        from: '"Dylan Cree" <noreply@swagmeister.uk>',
         to: email,
         subject: 'Contact Me',
         html: emailHtml,
