@@ -37,7 +37,7 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
     const emailUser = process.env.MAILGUN_USERNAME;
 
       const transporter = nodemailer.createTransport({
-        host: 'smtp.mailgun.org',
+        host: 'smtp.eu.mailgun.org',
         port: 587,
         auth: {
           user: emailUser,
