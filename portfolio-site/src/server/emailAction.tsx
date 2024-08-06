@@ -25,9 +25,6 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
         email: formData.get("email"),  
         content: formData.get("content"),
       });
-
-    console.log(validatedFields.data?.email);
-    console.log(validatedFields.data?.content);
     
     if (!validatedFields.success) {
       return {

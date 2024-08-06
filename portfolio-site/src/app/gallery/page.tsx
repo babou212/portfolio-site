@@ -17,7 +17,7 @@ export default async function GalleryPage() {
                   src={image.image} 
                   alt={image.title}
                   fill
-                  quality={80}
+                  quality={70}
                   style={{objectFit: "contain"}}
                   placeholder="empty" />
               </div>
