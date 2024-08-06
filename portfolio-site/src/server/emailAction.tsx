@@ -7,7 +7,6 @@
 
 import { EmailTemplate }  from "../components/emailTemplate";
 import { render } from "@react-email/components";
-import { NextResponse } from 'next/server'
 import nodemailer from "nodemailer";
 import { z } from "zod";
 
@@ -24,8 +23,11 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
 
     const validatedFields = schemaRegister.safeParse({
         email: formData.get("email"),  
-        message: formData.get("content"),
+        content: formData.get("content"),
       });
+
+    console.log(validatedFields.data?.email);
+    console.log(validatedFields.data?.content);
     
     if (!validatedFields.success) {
       return {
@@ -37,7 +39,6 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
     const emailPwd = process.env.MAILGUN_PASSWORD;
     const emailUser = process.env.MAILGUN_USERNAME;
 
-    try {
       const transporter = nodemailer.createTransport({
         host: 'smtp.mailgun.org',
         port: 587,
@@ -60,11 +61,8 @@ export async function sendEmailAction(prevState: any, formData: FormData) {
       
       await transporter.sendMail(options);
 
-      return NextResponse.json({ message: "Success: email was sent" }, {
-        status: 200});
-
-    } catch (error) {
-      return NextResponse.json({ message: "COULD NOT SEND MESSAGE"}, {
-      status: 500});
-    }
+      return {
+        ...prevState,
+        data: "ok",
+    };
 }
