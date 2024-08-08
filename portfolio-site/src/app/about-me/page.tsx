@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default function AboutPage() {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="flex items-center justify-center p-8">
         <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold">About Me</CardTitle>

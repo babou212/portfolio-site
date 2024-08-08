@@ -7,7 +7,7 @@ import 'server-only';
 import { db } from "./db";
 import { verifySession } from './session';
 
-export async function getUserByEmail(email: string | undefined) {
+export async function getUserByEmail(email: string) {
   if (email == undefined) { return  }
 
   const user = await db.user.findUnique({
@@ -19,7 +19,7 @@ export async function getUserByEmail(email: string | undefined) {
    return user;
 }
 
-export async function createPost(title: string, content: string | null, category: string, isDisplay: boolean ,filePath: string) {
+export async function createPost(title: string, content: string, category: string, isDisplay: boolean ,filePath: string) {
   if (await verifySession() == false) { return } 
 
   await db.post.create({

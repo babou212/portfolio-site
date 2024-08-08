@@ -14,7 +14,8 @@ export default async function HomePage() {
                   src={image.image} 
                   alt={image.title}
                   fill
-                  quality={70}
+                  quality={75}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   style={{objectFit: "contain"}}
                   placeholder="empty" />
               </div>

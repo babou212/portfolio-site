@@ -23,9 +23,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <div className="grid h-screen grid-rows-[auto,1fr]">
+          <div className="grid grid-rows-[auto,1fr]">
             <SideNav />
-            <main className="overflow-y-scroll">{children}</main>
+            <main className="overflow-y-scroll min-h-screen bg-gray-100 dark:bg-gray-900">{children}</main>
           </div>
         </ThemeProvider>
       </body>

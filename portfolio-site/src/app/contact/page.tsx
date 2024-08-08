@@ -37,7 +37,7 @@ export default function LoginForm() {
   if (submitted == true) { ref.current?.reset() };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex items-center justify-center p-8">
       <div className="w-full max-w-md">
         <form ref={ref} onSubmit={() => setSubmitted(true)} action={formAction}>
           <Card>

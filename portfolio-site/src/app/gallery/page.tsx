@@ -17,7 +17,8 @@ export default async function GalleryPage() {
                   src={image.image} 
                   alt={image.title}
                   fill
-                  quality={70}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  quality={75}
                   style={{objectFit: "contain"}}
                   placeholder="empty" />
               </div>
