@@ -23,10 +23,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <div className="grid grid-rows-[auto,1fr]">
-            <SideNav />
-            <main className="overflow-y-scroll min-h-screen bg-gray-100 dark:bg-gray-900">{children}</main>
-          </div>
+            <div className="fixed overflow-auto w-full">
+              <SideNav />
+              <main className="min-h-screen bg-gray-100 dark:bg-gray-900">{children}</main>
+            </div>
         </ThemeProvider>
       </body>
     </html>

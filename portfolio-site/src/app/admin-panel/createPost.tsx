@@ -34,7 +34,7 @@ export default function CreatePost() {
     if (submitted == true) { ref.current?.reset() };
         
     return(
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md pt-10">
             <form ref={ref} onSubmit={() => setSubmitted(true)} action={formAction}>
                 <Card>
                     <CardHeader className="space-y-1">

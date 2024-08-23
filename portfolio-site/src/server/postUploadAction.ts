@@ -27,7 +27,7 @@ const schemaRegister = z.object({
     content: z.string().min(0).max(100, {
         message: "Please enter valid description",
       }),
-      category: z.string().min(1).max(20, {
+    category: z.string().min(1).max(20, {
         message: "Please enter category description",
       }),
     image: z.any()
