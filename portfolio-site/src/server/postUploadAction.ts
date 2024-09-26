@@ -24,7 +24,7 @@ const schemaRegister = z.object({
     title: z.string().min(5).max(100, {
         message: "Please enter a valid title",
       }),
-    content: z.string().min(0).max(100, {
+    content: z.string().min(0).max(300, {
         message: "Please enter valid description",
       }),
     category: z.string().min(1).max(20, {

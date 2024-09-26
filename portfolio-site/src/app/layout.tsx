@@ -23,7 +23,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="fixed overflow-auto w-full">
+            <div className="overflow-auto w-full">
               <SideNav />
               <main className="min-h-screen bg-gray-100 dark:bg-gray-900">{children}</main>
             </div>

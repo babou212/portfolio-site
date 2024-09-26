@@ -40,7 +40,7 @@ export default function LoginForm() {
     <div className="flex items-center justify-center p-8">
       <div className="w-full max-w-md">
         <form ref={ref} onSubmit={() => setSubmitted(true)} action={formAction}>
-          <Card>
+          <Card className="p-8">
             <CardHeader className="space-y-1">
               <CardTitle className="text-3xl font-bold">Contact</CardTitle>
             </CardHeader>

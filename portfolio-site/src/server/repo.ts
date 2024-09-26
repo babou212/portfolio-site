@@ -69,3 +69,25 @@ export async function getPostsThatShouldBeDisplayed() {
 
  return posts;
 }
+
+export async function getPosts() {
+  const posts =  await db.post.findMany();
+
+ return posts;
+}
+
+export async function updatePost(id: number, title: string, content: string, category: string, isDisplay: boolean) {
+  if (await verifySession() == false) { return } 
+
+  await db.post.update({
+    where: {
+      id: id,
+    },
+    data: {
+      title: title,
+      content: content,
+      category: category,
+      isDisplay: isDisplay,
+    },
+  })
+}
